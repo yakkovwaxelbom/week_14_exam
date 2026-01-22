@@ -1,0 +1,9 @@
+docker build -t yakov234/week_14_exam:v1 .
+
+docker push yakov234/week_14_exam:v1 
+
+kubectl apply -f ./k8s
+
+oc expose svc week-14-exam-api-svc
+
+oc get routes

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: week-14-api
+  labels:
+    app: api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api
+
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: week-14-api-pod
+        image: yakov234/week_14_exam:v3
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+
+        env:
+        - name: MYSQL_HOST
+          value: "mysql-0.mysql"
+        - name: MYSQL_PORT
+          value: "3306"
+        - name: MYSQL_USER
+          value: "root"
+        - name: MYSQL_PASSWORD
+          value: "pass"
+        - name: MYSQL_DATABASE
+          value: "week_14_exam"
