@@ -6,6 +6,8 @@ class StorageService:
     
     def crate_records(self, records):
 
+        print(len(records[0]))
+
         query = """
                     INSERT INTO weapons
                     (
@@ -19,9 +21,10 @@ class StorageService:
                         storage_location,
                         year_estimated
                     )
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
 
         self.cursor.executemany(query, records)
 
         return self.cursor.rowcount
+

@@ -33,10 +33,4 @@ class HandleRequests:
         ]
 
         return StorageService(self.cursor).crate_records(records)
-
-
-
-
-
-
-
+        

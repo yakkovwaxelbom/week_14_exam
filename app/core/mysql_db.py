@@ -5,7 +5,7 @@ from core.errors import (MySQLAlreadyExist,
                          MySQLNotExist,
                          SQLSchemaNotExist)
 
-class SQL_Manager:
+class SQLManager:
     cnx = None
 
     @classmethod
@@ -31,7 +31,7 @@ class SQL_Manager:
     @classmethod
     def bad_init(cls):
 
-        path = 'sql\schema.sql'
+        path = './sql/schema.sql'
 
         try:
             with open(path, 'r') as f:
@@ -53,7 +53,7 @@ class SQL_Manager:
     
 def get_cursor():
     try:
-        cnx = SQL_Manager.cnx
+        cnx = SQLManager.cnx
         cursor = cnx.cursor(dictionary=True)
         yield cursor
         cnx.commit()
@@ -61,8 +61,8 @@ def get_cursor():
     except Exception as e:
         if cnx:
             cnx.rollback()
-        raise MySQLGeneralError(str(e))
-    
+        # raise MySQLGeneralError(str(e))
+        raise e
     finally:
         if cursor:
             cursor.close()
